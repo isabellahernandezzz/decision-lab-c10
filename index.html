@@ -1,125 +1,688 @@
-Decision-Making Under Uncertainty
-Interactive Decision Model — Criterion 10
-🌸 Pink Decision Lab 🌸
-🌷 Decision Problem
 
-Choose a preloaded example: Reset Example＋ Add Alternative＋ Add State of Nature
-🌸 Payoff Table
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pink Decision Lab 🌸</title>
 
-Edit alternatives, states, probabilities, and payoffs. Calculations update automatically.
+<style>
+:root {
+    --pink: #f8b8d0;
+    --light: #fff0f6;
+    --dark: #873b61;
+    --purple: #c9a7eb;
+    --white: #ffffff;
+}
 
-Alternative	
-Probability:
+* {
+    box-sizing: border-box;
+}
 
-Remove	
-Probability:
+body {
+    margin: 0;
+    padding: 25px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff0f6, #fce4ec, #f3e5f5);
+    color: #493343;
+}
 
-Remove	
-Probability:
+.container {
+    max-width: 1150px;
+    margin: auto;
+}
 
-Remove	Actions
-				Remove
-				Remove
-				Remove
-💗 Probability total: 1 — valid.
+header {
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 5px 20px #e9c5d6;
+    margin-bottom: 25px;
+}
 
-💗 Results by Criterion
+h1 {
+    color: #d65b91;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
 
-Maximax
+h2 {
+    color: #b04b7d;
+}
 
-Large plant: 120 ★ Recommended
-Medium plant: 90
-Small plant: 60
-Best: Large plant
+h3 {
+    color: #9b5bb5;
+}
 
-Maximin
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px #ead0df;
+}
 
-Large plant: 20
-Medium plant: 40
-Small plant: 50 ★ Recommended
-Best: Small plant
+button {
+    background: #e9a8c5;
+    color: #632b49;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px;
+    transition: 0.2s;
+}
 
-Minimax Regret
+button:hover {
+    background: #d985ad;
+    transform: translateY(-2px);
+}
 
-Large plant: 35
-Medium plant: 30 ★ Recommended
-Small plant: 70
-Best: Medium plant
+input, select {
+    padding: 9px;
+    border: 2px solid #f0c5d9;
+    border-radius: 9px;
+    width: 100%;
+    background: #fffafd;
+}
 
-EMV / Bayes
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
 
-Large plant: 77 ★ Recommended
-Medium plant: 68.5
-Small plant: 55.75
-Best: Large plant
+th {
+    background: #f8c7dc;
+    color: #713b56;
+}
 
-🌷 Staged Filtering
+th, td {
+    border: 1px solid #f1d5e2;
+    padding: 10px;
+    text-align: center;
+}
 
-Alternatives pass through each criterion. Ties remain in the process.
+td input {
+    min-width: 70px;
+}
 
-Step 1: Maximax
+.results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
 
-Before: Large plant, Medium plant, Small plant
+.result-box {
+    background: #fff0f6;
+    padding: 18px;
+    border-radius: 15px;
+    border: 2px solid #f4c5d9;
+}
 
-Retained: Large plant
+.recommended {
+    background: #fce4ec;
+    border: 2px solid #d65b91;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
 
-Eliminated: Medium plant, Small plant
+.step {
+    background: #fff5fa;
+    border-left: 5px solid #d98ab2;
+    padding: 15px;
+    margin: 12px 0;
+    border-radius: 10px;
+}
 
-Step 2: Maximin
+.flow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 
-Before: Large plant
+.flow-box {
+    background: #fce4ec;
+    border: 2px solid #e8a4c4;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    min-width: 130px;
+}
 
-Retained: Large plant
+.arrow {
+    font-size: 25px;
+    color: #d65b91;
+}
 
-Eliminated: None
+footer {
+    text-align: center;
+    color: #9b5b7c;
+    padding: 20px;
+}
 
-Step 3: Minimax Regret
+@media(max-width: 600px) {
+    body {
+        padding: 10px;
+    }
 
-Before: Large plant
+    header, .card {
+        padding: 15px;
+    }
 
-Retained: Large plant
+    h1 {
+        font-size: 1.8rem;
+    }
 
-Eliminated: None
+    table {
+        font-size: 12px;
+    }
 
-Step 4: EMV / Bayes
+    th, td {
+        padding: 5px;
+    }
+}
+</style>
+</head>
 
-Before: Large plant
+<body>
 
-Retained: Large plant
+<div class="container">
 
-Eliminated: None
+<header>
+    <h1>🌸 Pink Decision Lab 🌸</h1>
+    <h2>Decision-Making Under Uncertainty</h2>
+    <p>Interactive Decision Model — Criterion 10</p>
+    <p>Grade 10</p>
+</header>
 
-🌸 Final recommendation: Large plant
+<section class="card">
+    <h2>🌷 Decision Problem</h2>
 
-🌸 Flow Diagram
+    <label for="example">Choose a preloaded example:</label>
 
-All Alternatives
-3 alternatives
-→
-Maximax
-1 remain
-Large plant
-→
-Maximin
-1 remain
-Large plant
-→
-Minimax Regret
-1 remain
-Large plant
-→
-EMV / Bayes
-1 remain
-Large plant
-→
-Final Decision
-Large plant
-💖 About This Project
+    <select id="example" onchange="loadExample()">
+        <option value="plant">Plant Investment</option>
+        <option value="business">Business Investment</option>
+        <option value="custom">Custom Decision</option>
+    </select>
 
-This interactive webpage applies decision theory using Maximax, Maximin, Minimax Regret, EMV/Bayes, and staged filtering.
+    <br><br>
 
-Open the AI conversation used to develop this webpage
+    <button onclick="resetExample()">Reset Example</button>
+    <button onclick="addAlternative()">＋ Add Alternative</button>
+    <button onclick="addState()">＋ Add State of Nature</button>
+</section>
 
-Replace # with your actual ChatGPT conversation share URL before publishing.
+<section class="card">
+    <h2>🌸 Payoff Table</h2>
 
-Pink Decision Lab — Grade 10 Criterion 10 🌸
+    <p>
+        Edit alternatives, states, probabilities, and payoffs.
+        Calculations update automatically.
+    </p>
+
+    <div style="overflow-x:auto">
+        <table id="payoffTable"></table>
+    </div>
+
+    <p id="probabilityMessage"></p>
+</section>
+
+<section class="card">
+    <h2>💗 Results by Criterion</h2>
+    <div id="results" class="results"></div>
+</section>
+
+<section class="card">
+    <h2>🌷 Staged Filtering</h2>
+
+    <p>
+        Alternatives pass through each criterion.
+        Ties remain in the process.
+    </p>
+
+    <div id="filtering"></div>
+</section>
+
+<section class="card">
+    <h2>🌸 Final Recommendation</h2>
+    <div id="recommendation"></div>
+</section>
+
+<section class="card">
+    <h2>🌸 Flow Diagram</h2>
+    <div id="flow" class="flow"></div>
+</section>
+
+<section class="card">
+    <h2>💖 About This Project</h2>
+
+    <p>
+        This interactive webpage applies decision theory using
+        Maximax, Maximin, Minimax Regret, EMV/Bayes,
+        and staged filtering.
+    </p>
+
+    <p>
+        Open the AI conversation used to develop this webpage:
+    </p>
+
+    <input
+        id="conversationLink"
+        type="url"
+        placeholder="Paste your ChatGPT conversation share URL here"
+    >
+
+    <button onclick="openConversation()">
+        Open AI Conversation
+    </button>
+</section>
+
+<footer>
+    Pink Decision Lab — Grade 10 Criterion 10 🌸
+</footer>
+
+</div>
+
+<script>
+
+let alternatives = [];
+let states = [];
+
+function loadExample() {
+    const type = document.getElementById("example").value;
+
+    if (type === "plant") {
+        alternatives = [
+            {name: "Large plant", payoffs: [120, 50, 20]},
+            {name: "Medium plant", payoffs: [90, 60, 40]},
+            {name: "Small plant", payoffs: [60, 55, 50]}
+        ];
+
+        states = [
+            {name: "High demand", probability: 0.4},
+            {name: "Medium demand", probability: 0.35},
+            {name: "Low demand", probability: 0.25}
+        ];
+    }
+
+    else if (type === "business") {
+        alternatives = [
+            {name: "Online Store", payoffs: [100, 70, 30]},
+            {name: "Physical Store", payoffs: [140, 50, 10]},
+            {name: "Small Business", payoffs: [60, 55, 40]}
+        ];
+
+        states = [
+            {name: "High demand", probability: 0.5},
+            {name: "Medium demand", probability: 0.3},
+            {name: "Low demand", probability: 0.2}
+        ];
+    }
+
+    else {
+        alternatives = [
+            {name: "Alternative 1", payoffs: [50, 30, 10]},
+            {name: "Alternative 2", payoffs: [40, 35, 20]}
+        ];
+
+        states = [
+            {name: "State 1", probability: 0.4},
+            {name: "State 2", probability: 0.35},
+            {name: "State 3", probability: 0.25}
+        ];
+    }
+
+    render();
+}
+
+function resetExample() {
+    loadExample();
+}
+
+function addAlternative() {
+    alternatives.push({
+        name: "Alternative " + (alternatives.length + 1),
+        payoffs: states.map(() => 0)
+    });
+
+    render();
+}
+
+function addState() {
+    states.push({
+        name: "State " + (states.length + 1),
+        probability: 0
+    });
+
+    alternatives.forEach(a => a.payoffs.push(0));
+
+    render();
+}
+
+function removeAlternative(index) {
+    if (alternatives.length <= 1) {
+        alert("You need at least one alternative.");
+        return;
+    }
+
+    alternatives.splice(index, 1);
+    render();
+}
+
+function removeState(index) {
+    if (states.length <= 1) {
+        alert("You need at least one state of nature.");
+        return;
+    }
+
+    states.splice(index, 1);
+
+    alternatives.forEach(a => {
+        a.payoffs.splice(index, 1);
+    });
+
+    render();
+}
+
+function updateAlternativeName(index, value) {
+    alternatives[index].name = value;
+    calculate();
+}
+
+function updateStateName(index, value) {
+    states[index].name = value;
+    calculate();
+}
+
+function updateProbability(index, value) {
+    states[index].probability = Number(value) || 0;
+    calculate();
+}
+
+function updatePayoff(aIndex, sIndex, value) {
+    alternatives[aIndex].payoffs[sIndex] = Number(value) || 0;
+    calculate();
+}
+
+function getMax(a) {
+    return Math.max(...a.payoffs);
+}
+
+function getMin(a) {
+    return Math.min(...a.payoffs);
+}
+
+function getEMV(a) {
+    return a.payoffs.reduce((sum, payoff, i) => {
+        return sum + payoff * states[i].probability;
+    }, 0);
+}
+
+function getRegrets() {
+    const maxima = states.map((s, i) => {
+        return Math.max(...alternatives.map(a => a.payoffs[i]));
+    });
+
+    return alternatives.map(a => {
+        return a.payoffs.map((payoff, i) => maxima[i] - payoff);
+    });
+}
+
+function getMinimaxRegret() {
+    const regrets = getRegrets();
+
+    return alternatives.map((a, i) => {
+        return Math.max(...regrets[i]);
+    });
+}
+
+function bestIndexes(values, mode) {
+    const target = mode === "max"
+        ? Math.max(...values)
+        : Math.min(...values);
+
+    return values
+        .map((value, i) => Math.abs(value - target) < 0.000001 ? i : -1)
+        .filter(i => i !== -1);
+}
+
+function formatNumber(value) {
+    return Number(value.toFixed(2)).toString();
+}
+
+function render() {
+    renderTable();
+    calculate();
+}
+
+function renderTable() {
+    let html = "<tr><th>Alternative</th>";
+
+    states.forEach((state, i) => {
+        html += `
+        <th>
+            <input value="${state.name}"
+            onchange="updateStateName(${i},this.value)">
+            <br>
+            Probability:
+            <input type="number" min="0" max="1" step="0.01"
+            value="${state.probability}"
+            onchange="updateProbability(${i},this.value)">
+            <button onclick="removeState(${i})">Remove</button>
+        </th>`;
+    });
+
+    html += "<th>Actions</th></tr>";
+
+    alternatives.forEach((a, i) => {
+        html += `<tr>
+            <td>
+                <input value="${a.name}"
+                onchange="updateAlternativeName(${i},this.value)">
+            </td>`;
+
+        a.payoffs.forEach((payoff, j) => {
+            html += `
+            <td>
+                <input type="number" value="${payoff}"
+                onchange="updatePayoff(${i},${j},this.value)">
+            </td>`;
+        });
+
+        html += `
+        <td>
+            <button onclick="removeAlternative(${i})">Remove</button>
+        </td>
+        </tr>`;
+    });
+
+    document.getElementById("payoffTable").innerHTML = html;
+}
+
+function calculate() {
+
+    if (alternatives.length === 0 || states.length === 0) {
+        return;
+    }
+
+    const probabilityTotal = states.reduce(
+        (sum, s) => sum + s.probability, 0
+    );
+
+    const valid = Math.abs(probabilityTotal - 1) < 0.0001;
+
+    document.getElementById("probabilityMessage").innerHTML =
+        valid
+        ? "💗 Probability total: 1 — valid."
+        : "⚠️ Probability total: " + formatNumber(probabilityTotal) +
+          " — probabilities should add up to 1.";
+
+    const maximaxValues = alternatives.map(a => getMax(a));
+    const maximinValues = alternatives.map(a => getMin(a));
+    const regretValues = getMinimaxRegret();
+    const emvValues = alternatives.map(a => getEMV(a));
+
+    const maximaxBest = bestIndexes(maximaxValues, "max");
+    const maximinBest = bestIndexes(maximinValues, "max");
+    const regretBest = bestIndexes(regretValues, "min");
+    const emvBest = bestIndexes(emvValues, "max");
+
+    const criteria = [
+        {
+            name: "Maximax",
+            values: maximaxValues,
+            best: maximaxBest,
+            mode: "max"
+        },
+        {
+            name: "Maximin",
+            values: maximinValues,
+            best: maximinBest,
+            mode: "max"
+        },
+        {
+            name: "Minimax Regret",
+            values: regretValues,
+            best: regretBest,
+            mode: "min"
+        },
+        {
+            name: "EMV / Bayes",
+            values: emvValues,
+            best: emvBest,
+            mode: "max"
+        }
+    ];
+
+    let resultHTML = "";
+
+    criteria.forEach(c => {
+        resultHTML += `
+        <div class="result-box">
+            <h3>${c.name}</h3>`;
+
+        alternatives.forEach((a, i) => {
+            resultHTML += `
+            <p class="${c.best.includes(i) ? "recommended" : ""}">
+                ${a.name}: ${formatNumber(c.values[i])}
+                ${c.best.includes(i) ? " ★ Recommended" : ""}
+            </p>`;
+        });
+
+        resultHTML += `
+            <p><b>Best:</b>
+            ${c.best.map(i => alternatives[i].name).join(", ")}</p>
+        </div>`;
+    });
+
+    document.getElementById("results").innerHTML = resultHTML;
+
+    renderFiltering(criteria);
+}
+
+function renderFiltering(criteria) {
+
+    let remaining = alternatives.map((a, i) => i);
+    let filteringHTML = "";
+
+    criteria.forEach((criterion, step) => {
+
+        const before = [...remaining];
+
+        const values = remaining.map(i => criterion.values[i]);
+
+        const target = criterion.mode === "max"
+            ? Math.max(...values)
+            : Math.min(...values);
+
+        remaining = remaining.filter(i =>
+            Math.abs(criterion.values[i] - target) < 0.000001
+        );
+
+        const eliminated = before.filter(i => !remaining.includes(i));
+
+        filteringHTML += `
+        <div class="step">
+            <h3>Step ${step + 1}: ${criterion.name}</h3>
+
+            <p><b>Before:</b>
+            ${before.map(i => alternatives[i].name).join(", ")}</p>
+
+            <p><b>Retained:</b>
+            ${remaining.map(i => alternatives[i].name).join(", ")}</p>
+
+            <p><b>Eliminated:</b>
+            ${eliminated.length
+                ? eliminated.map(i => alternatives[i].name).join(", ")
+                : "None"}
+            </p>
+        </div>`;
+    });
+
+    document.getElementById("filtering").innerHTML = filteringHTML;
+
+    const finalNames = remaining.map(i => alternatives[i].name);
+
+    document.getElementById("recommendation").innerHTML = `
+        <div class="recommended">
+            🌸 Final recommendation:
+            ${finalNames.join(", ")}
+        </div>
+    `;
+
+    let flowHTML = `
+        <div class="flow-box">
+            <b>All Alternatives</b><br>
+            ${alternatives.length} alternatives
+        </div>
+    `;
+
+    criteria.forEach(c => {
+        const best = c.mode === "max"
+            ? Math.max(...remaining.map(i => c.values[i]))
+            : Math.min(...remaining.map(i => c.values[i]));
+
+        flowHTML += `
+            <div class="arrow">→</div>
+            <div class="flow-box">
+                <b>${c.name}</b><br>
+                ${remaining.length} remain
+            </div>
+        `;
+    });
+
+    flowHTML += `
+        <div class="arrow">→</div>
+        <div class="flow-box">
+            <b>Final Decision</b><br>
+            ${finalNames.join(", ")}
+        </div>
+    `;
+
+    document.getElementById("flow").innerHTML = flowHTML;
+}
+
+function openConversation() {
+    const link = document.getElementById("conversationLink").value.trim();
+
+    if (!link) {
+        alert("Please paste your ChatGPT conversation share URL.");
+        return;
+    }
+
+    window.open(link, "_blank");
+}
+
+loadExample();
+
+</script>
+
+</body>
+</html>
